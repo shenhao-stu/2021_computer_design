@@ -1,0 +1,45 @@
+epoch: 1, lr: 0.0005, tr: 0.80, tau: 0.634
+  gen loss: 4.166  ppl:64.46
+
+epoch: 1, lr: 0.0005, tr: 0.80, tau: 0.634
+  gen loss: 4.161  ppl:64.14
+
+epoch: 2, lr: 0.0010, tr: 1.00, tau: 0.402
+  gen loss: 4.224  ppl:68.31
+
+epoch: 3, lr: 0.0008, tr: 1.00, tau: 0.255
+  gen loss: 4.196  ppl:66.39
+
+epoch: 4, lr: 0.0007, tr: 1.00, tau: 0.161
+  gen loss: 4.189  ppl:65.95
+
+epoch: 5, lr: 0.0006, tr: 0.91, tau: 0.102
+  gen loss: 4.156  ppl:63.79
+
+epoch: 6, lr: 0.0005, tr: 0.89, tau: 0.065
+  gen loss: 4.144  ppl:63.03
+
+epoch: 7, lr: 0.0005, tr: 0.87, tau: 0.041
+  gen loss: 4.132  ppl:62.33
+
+epoch: 8, lr: 0.0004, tr: 0.86, tau: 0.026
+  gen loss: 4.125  ppl:61.86
+
+epoch: 1, lr: 0.0005, tr: 0.80, tau: 0.634
+  gen loss: 4.167  ppl:64.50
+
+epoch: 2, lr: 0.0010, tr: 1.00, tau: 0.402
+  gen loss: 4.229  ppl:68.68
+
+epoch: 3, lr: 0.0008, tr: 1.00, tau: 0.255
+  gen loss: 4.197  ppl:66.48
+
+epoch: 4, lr: 0.0007, tr: 1.00, tau: 0.161
+  gen loss: 4.188  ppl:65.92
+
+epoch: 5, lr: 0.0006, tr: 0.91, tau: 0.102
+  gen loss: 4.156  ppl:63.81
+
+epoch: 6, lr: 0.0005, tr: 0.89, tau: 0.065
+  gen loss: 4.144  ppl:63.04
+
