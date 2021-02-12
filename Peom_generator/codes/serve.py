@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, Response, jsonify
-from generator import Generator
-from config import hparams, device
-import copy
 import argparse
+import copy
 import json
+
+from flask import Flask, request, Response, jsonify
+
+from config import hparams, device
+from generator import Generator
 
 
 def parse_args():
