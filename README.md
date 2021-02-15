@@ -29,12 +29,12 @@ pip install requirements.txt
 ##### step 2 : 开启服务并测试
 ```
 cd Peom_generator/codes/
-python3 serve.py
+python3 server.py
 ```
 
 ##### step 3 : 让服务保持运行状态
 ```
-nohup python3 serve.py > response.log 2>&1 &
+nohup python3 server.py > response.log 2>&1 &
 ```
 
 ![image-20210204204603197](./诗歌生成图例.png)
