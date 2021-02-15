@@ -7,6 +7,7 @@ import copy
 import json
 
 from flask import Flask, request, Response, jsonify
+from flask_cors import CORS
 
 from config import hparams, device
 from generator import Generator
@@ -155,6 +156,7 @@ class GenerateTool(object):
 
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 
 @app.route('/GenPeom', methods=['POST'])
@@ -177,4 +179,5 @@ def peom_generator():
 
 
 if __name__ == '__main__':
+    app.config['JSON_AS_ASCII'] = False
     app.run(host='0.0.0.0', port=5000, debug=True)

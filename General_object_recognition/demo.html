@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>General_object_recognition</title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function imgPreview(fileDom) {
+            //判断是否支持FileReader
+            if (window.FileReader) {
+                var reader = new FileReader();
+            } else {
+                alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+            }
+
+            //获取文件
+            var file = fileDom.files[0];
+            var imageType = /^image\//;
+            //是否是图片
+            if (!imageType.test(file.type)) {
+                alert("请选择图片！");
+                return;
+            }
+            //读取完成
+            reader.onload = function (e) {
+                //获取图片dom
+                var img = document.getElementById("preview");
+                //图片路径设置为读取的图片
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+    <script>
+        function my_sub() {
+            var formdata = new FormData($("#form")[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                // url: "http://8.129.5.124:5500/predict",
+                url: "http://39.96.5.53:5500/predict",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (result) {
+                    console.log(result);
+                    data_show(result);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+        function data_show(data) {
+            var html = data.result
+            var res = document.getElementById("res")
+            res.innerHTML = html
+
+        }
+    </script>
+</head>
+
+<body>
+    <form name="form" id="form" action="" method="post" enctype="multipart/form-data">
+        <div>
+            <img id="preview" width="20%"/>
+        </div>
+        <input name="file" type="file" onchange="imgPreview(this)">
+        <br>
+        <input type="button" value="提交" onclick="my_sub()">
+    </form>
+    <div>
+        <h4>输出</h4>
+        <font size="2" color="black">
+            <p id="res"><br></p>
+        </font>
+    </div>
+</body>
+
+</html>

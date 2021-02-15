@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Peom_generator</title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function my_sub() {
+            var formdata = new FormData($("#form")[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                // url: "http://8.129.5.124:5000/GenPeom",
+                url: "http://39.96.5.53:5000/GenPeom",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (result) {
+                    console.log(result);
+                    data_show(result);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+        function data_show(data) {
+            var html = data.result
+            var res = document.getElementById("res")
+            res.innerHTML = html
+
+        }
+    </script>
+</head>
+
+<body>
+    <form name="form" id="form" action="" method="post" enctype="multipart/form-data">
+        <input name="keys" type="text">
+        <br>
+        <input name="pattern_id" type="text">
+        <br>
+        <input name="rhyme" type="text">
+        <br>
+        <input type="button" value="提交" onclick="my_sub()">
+    </form>
+    <div>
+        <h4>输出</h4>
+        <font size="2" color="black">
+            <p id="res"></p>
+        </font>
+    </div>
+</body>
+
+</html>
