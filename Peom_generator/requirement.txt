@@ -1,4 +1,6 @@
 Flask
+matplotlib
+requests
 torch-1.5.0+cpu-cp38-cp38-linux_x86_64.whl
 torchvision-0.6.0+cpu-cp38-cp38-linux_x86_64.whl
-matplotlib
+flask_cors
