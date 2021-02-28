@@ -53,5 +53,22 @@ python3 access_token.py
 ```
 python3 sample_serve.py
 ```
-![](./Style_trans/res_img.jpg)
 
+##### step 3 : 接口API
+- file : 图片的二进制
+- opt
+  - cartoon：卡通画风格
+  - pencil：铅笔风格
+  - color_pencil：彩色铅笔画风格
+  - warm：彩色糖块油画风格
+  - wave：神奈川冲浪里油画风格
+  - lavender：薰衣草油画风格
+  - mononoke：奇异油画风格
+  - scream：呐喊油画风格
+  - gothic：哥特油画风格
+
+##### step 4 : Response
+- msg : success
+- state : success
+- res : 图片Base64编码
+![](./Style_trans/res_img.jpg)
