@@ -42,3 +42,16 @@ nohup python3 server.py > response.log 2>&1 &
 #### 诗歌+图片——前端正在做
 
 #### 诗歌匹配滤镜——风格迁移
+##### step 1 : 配置access_token
+
+
+```
+cd Style_trans/
+python3 access_token.py
+```
+##### step 2 : 测试图片预测结果
+```
+python3 sample_serve.py
+```
+![](./Style_trans/res_img.jpg)
+
