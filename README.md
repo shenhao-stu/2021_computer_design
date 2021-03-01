@@ -47,7 +47,7 @@ nohup python3 server.py > response.log 2>&1 &
 	- 05 五绝二
 	- 06 五绝三
 	- 07 五绝四
-- rthyme : 1-30 的韵脚
+- rhyme : 1-30 的韵脚
 
 ![image-20210204204603197](./诗歌生成图例.png)
 
