@@ -28,7 +28,7 @@ pip install requirements.txt
 ```
 ##### step 2 : 开启服务并测试
 ```
-cd Peom_generator/codes/
+cd Poem_generator/codes/
 python3 server.py
 ```
 
