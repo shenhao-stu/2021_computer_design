@@ -36,6 +36,18 @@ python3 server.py
 ```
 nohup python3 server.py > response.log 2>&1 &
 ```
+##### step 4 : 接口API参数
+- keys : 关键词不超过4个
+- pattern_id
+	- 00 七绝一
+	- 01 七绝二
+	- 02 七绝三
+	- 03 七绝四
+	- 04 五绝一
+	- 05 五绝二
+	- 06 五绝三
+	- 07 五绝四
+- rthyme : 1-30 的韵脚
 
 ![image-20210204204603197](./诗歌生成图例.png)
 
