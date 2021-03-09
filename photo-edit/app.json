@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/modifyPhoto/modify",
+    "pages/splicePhoto/splice",
+    "pages/emotionChoose/emotionChoose",
+    "pages/emotionEdit/emotionEdit",
+    "pages/spliceMenu/spliceMenu"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "诗情画意",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}
