@@ -4,5 +4,14 @@
 /Poem_generator/pictures
 /Poem_generator/log
 /photo-edit/project.config.json
-/.idea
+.idea
 /诗情画意 答辩PPT
+.vscode
+/General_object_recognition/server.py
+/General_object_recognition/access_token.json
+/General_object_recognition/access_token.py
+/General_object_recognition/demo.html
+/General_object_recognition/predict_log.json
+/General_object_recognition/res.py
+/Filter/demo.html
+/Filter/server.py
