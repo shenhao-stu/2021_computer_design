@@ -15,3 +15,13 @@
 /General_object_recognition/res.py
 /Filter/demo.html
 /Filter/server.py
+/web_server
+/Style_trans/access_token.py
+/Style_trans/demo.html
+/Style_trans/res.json
+/Style_trans/res.py
+/Style_trans/server.py
+/Style_trans/access_token.json
+/Style_trans/sample.jpg
+/database_api/Mongodb.py
+/database_api/test.py
