@@ -20,7 +20,7 @@
 </p>
 
 特色：AI自动识别上传的图片并生成诗歌，进行配图 + 全唐诗、全宋词的数据库模糊匹配
-- [x] #### MongoDB + Flask实现诗词模糊查询
+#### MongoDB + Flask实现诗词模糊查询
 
 ##### step 1 : 诗词的爬取
 ```
@@ -37,8 +37,9 @@ python3 db.py
 ##### step 3 : API+response
 ![response](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210314215257981.png)
 
-- [x] 
-  #### 图片的识别——功能已经实现
+---
+
+#### 图片的识别——功能已经实现
 
 
 ##### step 1 : 配置access_token
@@ -55,7 +56,9 @@ python3 res_sample.py
 
 ![](./诗歌的识别.png)
 
-- [x] #### 关键字生成诗歌——功能正在调试
+---
+
+#### 关键字生成诗歌——功能正在调试
 
 
 ##### step 1 : 安装依赖
@@ -94,9 +97,13 @@ nohup python3 server.py > response.log 2>&1 &
 
 ![image-20210204204603197](./诗歌生成图例.png)
 
+---
+
 #### 诗歌+图片——前端
 
 ![image-20210314220233037](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210314220233037.png)
+
+---
 
 #### 诗歌匹配滤镜——风格迁移
 ##### step 1 : 配置access_token
@@ -132,6 +139,8 @@ python3 sample_serve.py
 - state : success
 - res : 图片Base64编码
 ![](./Style_trans/res_img.jpg)
+
+---
 
 #### 诗歌的美颜滤镜
 ##### step 1 : 接口API
