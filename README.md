@@ -1,8 +1,45 @@
-### 作品名称：《诗情画意》
+<p align="center">
+  <a href="https://github.com/shenhao-stu/2021_computer_design">
+      <img src="https://gitee.com/shenhao-stu/picgo/raw/master/Other/logo_3.png" alt="chinese-poetry" height=40% width=40% />
+  </a>
+</p>
+<p align="center">Python | shenhao0223@163.sufe.edu.cn | 上海财经大学 </p>
 
-AI自动识别上传的图片并生成诗歌，进行配图
+<h2 align="center">AI-chinese-poetry: 《诗情画意》</h2>
 
-#### 图片的识别——功能已经实现
+<p align="center">
+  <a href="https://github.com/shenhao-stu/2021_computer_design" rel="nofollow">
+    <img height="28px" alt="Build Status" src="https://img.shields.io/badge/build-passing-green.svg?style=for-the-badge" style="max-width:100%;">
+  </a>
+  <a href="https://github.com/shenhao-stu/2021_computer_design/LICENSE">
+    <img height="28px" alt="License" src="http://img.shields.io/badge/license-mit-blue.svg?style=for-the-badge" style="max-width:100%;">
+  </a>
+  <a href="https://github.com/shenhao-stu/2021_computer_design" rel="nofollow">
+    <img alt="HitCount" height="28px" src="http://hits.dwyl.com/shenhao-stu/2021_computer_design.svg" style="max-width:100%;">
+  </a>
+</p>
+
+特色：AI自动识别上传的图片并生成诗歌，进行配图 + 全唐诗、全宋词的数据库模糊匹配
+- [x] #### MongoDB + Flask实现诗词模糊查询
+
+##### step 1 : 诗词的爬取
+```
+cd database_api/craw_poetry
+python3 crawl_poetry
+python3 db.py
+```
+##### step 2 : MongoDB数据库的存储
+
+> db = poetry collection = ccpc
+
+![image-20210314215946890](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210314215946890.png)
+
+##### step 3 : API+response
+![response](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210314215257981.png)
+
+- [x] 
+  #### 图片的识别——功能已经实现
+
 
 ##### step 1 : 配置access_token
 
@@ -18,7 +55,8 @@ python3 res_sample.py
 
 ![](./诗歌的识别.png)
 
-#### 关键字生成诗歌——功能正在调试
+- [x] #### 关键字生成诗歌——功能正在调试
+
 
 ##### step 1 : 安装依赖
 
@@ -38,20 +76,27 @@ nohup python3 server.py > response.log 2>&1 &
 ```
 ##### step 4 : 接口API参数
 - keys : 关键词不超过4个
+
 - pattern_id
-	- 00 七绝一
-	- 01 七绝二
-	- 02 七绝三
-	- 03 七绝四
-	- 04 五绝一
-	- 05 五绝二
-	- 06 五绝三
-	- 07 五绝四
+
+  | 序号 | opt    |
+  | ---- | ------ |
+  | 0    | 七绝一 |
+  | 1    | 七绝二 |
+  | 2    | 七绝三 |
+  | 3    | 七绝四 |
+  | 4    | 五绝一 |
+  | 5    | 五绝二 |
+  | 6    | 五绝三 |
+  | 7    | 五绝四 |
+
 - rhyme : 1-30 的韵脚
 
 ![image-20210204204603197](./诗歌生成图例.png)
 
-#### 诗歌+图片——前端正在做
+#### 诗歌+图片——前端
+
+![image-20210314220233037](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210314220233037.png)
 
 #### 诗歌匹配滤镜——风格迁移
 ##### step 1 : 配置access_token
@@ -68,16 +113,19 @@ python3 sample_serve.py
 
 ##### step 3 : 接口API
 - file : 图片的二进制
+
 - opt
-  - cartoon：卡通画风格
-  - pencil：铅笔风格
-  - color_pencil：彩色铅笔画风格
-  - warm：彩色糖块油画风格
-  - wave：神奈川冲浪里油画风格
-  - lavender：薰衣草油画风格
-  - mononoke：奇异油画风格
-  - scream：呐喊油画风格
-  - gothic：哥特油画风格
+
+  | 序号 | opt          | 中文名称             |
+  | ---- | ------------ | -------------------- |
+  | 1    | cartoon      | 卡通画风格           |
+  | 2    | pencil       | 铅笔风格             |
+  | 3    | color_pencil | 彩色铅笔画风格       |
+  | 4    | warm         | 彩色糖块油画风格     |
+  | 5    | wave         | 神奈川冲浪里油画风格 |
+  | 6    | lavender     | 薰衣草油画风格       |
+  | 7    | mononoke     | 奇异油画风格         |
+  | 8    | scream       | 呐喊油画风格         |
 
 ##### step 4 : Response
 - msg : success
