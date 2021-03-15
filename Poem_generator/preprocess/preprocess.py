@@ -1,24 +1,22 @@
-# -*- coding: utf-8 -*-
-# @Author: Xiaoyuan Yi
-# @Last Modified by:   Xiaoyuan Yi
-# @Last Modified time: 2020-06-11 20:25:32
-# @Email: yi-xy16@mails.tsinghua.edu.cn
-# @Description:
-'''
-Copyright 2020 THUNLP Lab. All Rights Reserved.
-This code is part of the online Chinese poetry generation system, Jiuge.
-System URL: https://jiuge.thunlp.cn/ and https://jiuge.thunlp.org/.
-Github: https://github.com/THUNLP-AIPoet.
-'''
+# -*- encoding: utf-8 -*-
+"""
+@Author             :  Hao Shen 
+@Last Modified by   :  Hao Shen
+@Last Modified time :  2021/03/15 11:32:29
+@Email              :  shenhao0223sh@gamil.com
+@Describe           :  None
+"""
+
 import pickle
 import json
 import random
 
 from pattern_extractor import PatternExtractor
 
+
 def outFile(data, file_name):
-    print ("output data to %s, num: %d" % (file_name, len(data)))
-    with open(file_name, 'w',encoding='utf-8') as fout:
+    print("output data to %s, num: %d" % (file_name, len(data)))
+    with open(file_name, 'w', encoding='utf-8') as fout:
         for d in data:
             fout.write(d+"\n")
 
@@ -27,18 +25,18 @@ class PreProcess(object):
     """A Tool for data preprocess.
     Please note that this tool is only for Chinese quatrains.
     """
+
     def __init__(self):
         super(PreProcess, self).__init__()
         self.min_freq = 1
         self.sens_num = 4  # sens_num must be 4
-        self.key_num = 4 # max number of keywords
+        self.key_num = 4  # max number of keywords
 
         self.extractor = PatternExtractor("../data/")
 
-
     def create_dic(self, poems):
-        print ("creating the word dictionary...")
-        print ("input poems: %d" % (len(poems)))
+        print("creating the word dictionary...")
+        print("input poems: %d" % (len(poems)))
         count_dic = {}
         for p in poems:
             poem = p.strip().replace("|", "")
@@ -49,8 +47,8 @@ class PreProcess(object):
                 else:
                     count_dic[c] = 1
 
-        vec = sorted(count_dic.items(), key=lambda d:d[1], reverse=True)
-        print ("original word num:%d" % (len(vec)))
+        vec = sorted(count_dic.items(), key=lambda d: d[1], reverse=True)
+        print("original word num:%d" % (len(vec)))
 
         # add special symbols
         # --------------------------------------
@@ -68,9 +66,8 @@ class PreProcess(object):
         dic['<B>'] = 3
         idic[3] = '<B>'
 
-
         idx = 4
-        print ("min freq:%d" % (self.min_freq))
+        print("min freq:%d" % (self.min_freq))
 
         for c, v in vec:
             if v < self.min_freq:
@@ -80,13 +77,12 @@ class PreProcess(object):
                 idic[idx] = c
                 idx += 1
 
-        print ("total word num: %s" % (len(dic)))
+        print("total word num: %s" % (len(dic)))
 
         return dic, idic
 
-
     def build_dic(self, infile):
-        with open(infile, 'r',encoding='utf-8') as fin:
+        with open(infile, 'r', encoding='utf-8') as fin:
             lines = fin.readlines()
 
         poems = []
@@ -106,20 +102,16 @@ class PreProcess(object):
         dic_file = "vocab.pickle"
         idic_file = "ivocab.pickle"
 
-        print ("saving dictionary to %s" % (dic_file))
+        print("saving dictionary to %s" % (dic_file))
         with open(dic_file, 'wb') as fout:
             pickle.dump(dic, fout, -1)
 
-
-        print ("saving inverting dictionary to %s" % (idic_file))
+        print("saving inverting dictionary to %s" % (idic_file))
         with open(idic_file, 'wb') as fout:
             pickle.dump(idic, fout, -1)
 
-
         # building training lines
         outFile(training_lines, "training_lines.txt")
-
-
 
     def line2idxes(self, line):
         chars = [c for c in line]
@@ -133,10 +125,8 @@ class PreProcess(object):
 
         return idxes
 
-
-
     def read_corpus(self, infile):
-        with open(infile, 'r',encoding='utf-8') as fin:
+        with open(infile, 'r', encoding='utf-8') as fin:
             lines = fin.readlines()
 
         corpus = []
@@ -149,7 +139,6 @@ class PreProcess(object):
 
         return corpus
 
-
     def build_pattern(self, sens):
         length = len(sens[0])
         assert length == 5 or length == 7
@@ -157,7 +146,6 @@ class PreProcess(object):
         rhymes = self.extractor.get_poem_rhyme(sens)
         if len(rhymes) == 0:
             return ""
-
 
         rhythm_pattern = self.extractor.get_poem_rhythm(sens, length)
         if len(rhythm_pattern) == 0:
@@ -168,7 +156,6 @@ class PreProcess(object):
                 rhythm_pattern[i][-1] = rhymes[i]
 
         return rhythm_pattern
-
 
     def build_data(self, corpus, convert_to_indices=True):
         skip_count = 0
@@ -187,20 +174,17 @@ class PreProcess(object):
                 skip_count += 1
                 continue
 
-
             lens = [len(line) for line in lines]
 
             if not (lens[0] == lens[1] == lens[2] == lens[3]):
                 skip_count += 1
                 continue
 
-
             length = lens[0]
             # only for Chinese quatrains
             if length != 5 and length != 7:
                 skip_count += 1
                 continue
-
 
             pattern = self.build_pattern(lines)
             if len(pattern) == 0:
@@ -210,7 +194,7 @@ class PreProcess(object):
             if not convert_to_indices:
                 for keynum in range(1, len(keywords)+1):
                     tup = (random.sample(keywords, keynum),
-                        lines, keynum, pattern)
+                           lines, keynum, pattern)
                     data.append(tup)
                 continue
 
@@ -226,20 +210,18 @@ class PreProcess(object):
             # keywords to indices
             key_idxes_vec = [self.line2idxes(keyword) for keyword in keywords]
 
-
             for keynum in range(1, len(key_idxes_vec)+1):
                 tup = (random.sample(key_idxes_vec, keynum),
-                    line_idxes_vec, keynum, pattern)
+                       line_idxes_vec, keynum, pattern)
                 data.append(tup)
 
-        print ("data num: %d, skip_count: %d" %\
-            (len(data), skip_count))
+        print("data num: %d, skip_count: %d" %
+              (len(data), skip_count))
 
         return data
 
-
     def build_test_data(self, infile, out_inp_file, out_trg_file):
-        with open(infile, 'r',encoding='utf-8') as fin:
+        with open(infile, 'r', encoding='utf-8') as fin:
             lines = fin.readlines()
 
         test = self.read_corpus(infile)
@@ -254,11 +236,8 @@ class PreProcess(object):
             inps.append(keywords+"#"+pattern)
             trgs.append(poem)
 
-
         outFile(inps, out_inp_file)
         outFile(trgs, out_trg_file)
-
-
 
     def process(self):
         # build the word dictionary
@@ -274,29 +253,27 @@ class PreProcess(object):
         random.shuffle(train_data)
         random.shuffle(valid_data)
 
-        print ("training data: %d" % (len(train_data)))
-        print ("validation data: %d" % (len(valid_data)))
+        print("training data: %d" % (len(train_data)))
+        print("validation data: %d" % (len(valid_data)))
 
         train_file = "train_data.pickle"
-        print ("saving training data to %s" % (train_file))
+        print("saving training data to %s" % (train_file))
         with open(train_file, 'wb') as fout:
             pickle.dump(train_data, fout, -1)
 
-
         valid_file = "valid_data.pickle"
-        print ("saving validation data to %s" % (valid_file))
+        print("saving validation data to %s" % (valid_file))
         with open(valid_file, 'wb') as fout:
             pickle.dump(valid_data, fout, -1)
 
         # build testing inputs and trgs
-        self.build_test_data("ccpc_test_v1.0.json", "test_inps.txt", "test_trgs.txt")
-
+        self.build_test_data("ccpc_test_v1.0.json",
+                             "test_inps.txt", "test_trgs.txt")
 
 
 def main():
     processor = PreProcess()
     processor.process()
-
 
 
 if __name__ == "__main__":

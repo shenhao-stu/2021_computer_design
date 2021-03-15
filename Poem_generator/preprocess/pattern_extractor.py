@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
-# @Author: Xiaoyuan Yi and Jiannan Liang
-# @Last Modified by:   Xiaoyuan Yi
-# @Last Modified time: 2020-06-11 20:24:22
-# @Email: yi-xy16@mails.tsinghua.edu.cn
-# @Description:
-'''
-Copyright 2020 THUNLP Lab. All Rights Reserved.
-This code is part of the online Chinese poetry generation system, Jiuge.
-System URL: https://jiuge.thunlp.cn/ and https://jiuge.thunlp.org/.
-Github: https://github.com/THUNLP-AIPoet.
-'''
+# -*- encoding: utf-8 -*-
+"""
+@Author             :  Hao Shen 
+@Last Modified by   :  Hao Shen
+@Last Modified time :  2021/03/15 11:32:44
+@Email              :  shenhao0223sh@gamil.com
+@Describe           :  None
+"""
 
 import pickle
 import os
