@@ -8,7 +8,7 @@
   display: block;
   width: 350rpx;
   position: absolute; 
-  top:180rpx;
+  top:100rpx;
   left:50%;
   transform: translateX(-50%);
   font-size: 60rpx;
@@ -29,6 +29,7 @@
 }
 .btn{
   border-bottom: 1rpx solid #b17a7e;
+  background-color: rgba(0, 0, 0, .2);
   padding: 0 10rpx;
   font-size: 40rpx;
   border-radius: 10rpx;

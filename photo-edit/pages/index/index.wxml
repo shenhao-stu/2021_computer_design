@@ -2,9 +2,9 @@
   <image class="logo" src="../../image/logo.png" mode="widthFix"/>
   <image class="bg-img" src='../../image/bg.jpg'></image>
   <view class="btn-area">
-    <navigator class="btn btn1" hover-class="none" url="../modifyPhoto/modify"><text class="icon1"></text><text class="text">传入图片</text></navigator>
-    <!-- <navigator class="btn btn2" hover-class="none" url="../spliceMenu/spliceMenu"><text class="icon2"></text><text class="text">趣味拼图</text></navigator>
-    <navigator class="btn btn3" hover-class="none" url="../emotionChoose/emotionChoose"><text class="icon3"></text><text class="text">智斗基地</text></navigator> -->
+    <navigator class="btn btn1" hover-class="none" url="../modifyPhoto/modify"><text class="icon1"></text><text class="text">看图写诗</text></navigator>
+    <navigator class="btn btn2" hover-class="none" url="../cangTou/cangTou"><text class="icon2"></text><text class="text">藏头诗</text></navigator>
+    <navigator class="btn btn3" hover-class="none" url="../calendar/calendar"><text class="icon3"></text><text class="text">诗歌日历</text></navigator>
   </view>
 </view>
 

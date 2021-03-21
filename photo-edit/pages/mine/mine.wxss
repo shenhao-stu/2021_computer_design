@@ -1,0 +1,38 @@
+/* pages/mine/mine.wxss */
+.wrapper {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.bg {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.title {
+  margin-top: 30rpx;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 60rpx;
+}
+
+.modify {
+  display: block;
+  position: absolute;
+  width: 70%;
+  top: 15%;
+  left: 15%;
+  background-color: pink;
+}
+
+input {
+  background-color:skyblue;
+}

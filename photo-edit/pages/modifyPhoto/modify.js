@@ -40,7 +40,7 @@ Page({
     poem: "请输入文字",
     // 滤镜
     filterInfo: [],
-    filterChinese: []
+    filterChinese: [],
   },
 
   /**
@@ -692,7 +692,7 @@ function chooseImage(self){
 function getPoem(self) {
   console.log(self.data.checkedKeyWords.join(' '))
   wx.request({
-    url: 'http://39.96.5.53:5000/GenPoem',
+    url: 'https://ai-poetry.top:5000/GenPoem',
     // url: 'http://8.129.5.124:5000/GenPoem',
     method: 'POST',
     header: {
@@ -700,8 +700,7 @@ function getPoem(self) {
     },
     data: {
       keys: self.data.checkedKeyWords.join(' '),
-      pattern_id: "6",
-      rhyme: "1"
+      pattern: "五言", // "七言"
     },
     success(res) {
       console.log(res.data.result)
@@ -716,10 +715,13 @@ function getPoem(self) {
 }
 function getKeyWords(self) {
   console.log('试图请求图片识别的实体')
+  wx.showLoading({
+    title: '识别中...',
+  })
   wx.uploadFile({
     filePath: self.data.tempImageSrc,
     name: 'file',
-    url: 'http://39.96.5.53:5500/predict',
+    url: 'https://ai-poetry.top:5000/predict',
     success(res) {
       const obj =  JSON.parse(res.data)
       self.setData({keyWords: obj.result.split(' ')})
@@ -727,7 +729,11 @@ function getKeyWords(self) {
     },
     fail() {
       console.log('图片实体请求失败')
+      self.setData({isLoadingEntity: false})
     },
+    complete() {
+      wx.hideLoading()
+    }
   })
 }
 

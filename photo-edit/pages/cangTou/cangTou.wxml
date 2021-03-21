@@ -1,0 +1,35 @@
+<!--pages/cangTou/cangTou.wxml-->
+
+<view class="container"  style="text-align:center;">
+  <h2>藏头诗</h2>
+  <view class="page-body">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+
+      <view class="page-section page-section-gap">
+        <view class="page-section-title">slider</view>
+        <slider value="50" name="slider" show-value ></slider>
+      </view>
+
+      <view class="page-section">
+        <view class="page-section-title">您要藏的头</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd" style="margin: 30rpx 0" >
+              <input class="weui-input" name="input" placeholder="请输入四个字" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button style="margin: 30rpx 10rpx" type="primary" formType="submit">提交</button>
+        <button style="margin: 30rpx 10rpx" formType="reset">重置</button>
+      </view>
+    </form>
+  </view>
+</view>
+<view wx:if="{{poem.length>0}}" class="poem-container">
+  <view class="poem-title">藏头诗</view>
+  <text wx:for="{{poem}}" class="poem-content">{{item+"。"}}</text>
+</view>
+

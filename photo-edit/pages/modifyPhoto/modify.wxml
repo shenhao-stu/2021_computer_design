@@ -13,8 +13,6 @@
         <checkbox wx:for="{{keyWords}}" value="{{item}}">{{item}}</checkbox>
       </checkbox-group>
     </view>
-    
-    <loading wx:if="{{keyWords.length===0 && !imageNotChoosed}}">请稍候，识别中..</loading>
   </view>
 
   <!-- 滤镜页面 -->
@@ -54,7 +52,7 @@
     <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true"></image>
     <text wx:if="{{allText.isTextActive}}" bindtap="{{allText.isTextActive?'focusInput':null}}" bindtouchstart="{{allText.isTextActive?'textMoveStart':null}}" bindtouchmove="{{allText.isTextActive?'textMove':null}}"class="active-text" style="left:{{allText.textL}}px;top:{{allText.textT}}px;font-size:{{allText.fontSize}}px;color:{{allText.fontColor}};font-style:{{allText.fontStyle}};font-weight:{{allText.fontWeight}}">{{allText.someText}}
     </text> 
-    <input value="{{poem}}" focus="{{inputFocus}}"confirm-type="done" bindinput="inputText" style="position:absolute;left:-999px;border: 3px solid black;"></input>
+    <input value="{{poem}}" focus="{{inputFocus}}"confirm-type="done" bindinput="inputText" style="position:absolute;left:9px;border: 3px solid black;"></input>
   </view>
 
   <!-- 涂鸦页面 -->

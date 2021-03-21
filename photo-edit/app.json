@@ -3,10 +3,10 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/modifyPhoto/modify",
-    "pages/splicePhoto/splice",
-    "pages/emotionChoose/emotionChoose",
-    "pages/emotionEdit/emotionEdit",
-    "pages/spliceMenu/spliceMenu"
+    "pages/cangTou/cangTou",
+    "pages/calendar/calendar",
+    "pages/mine/mine",
+    "pages/photoshop/photoshop"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,5 +14,30 @@
     "navigationBarTitleText": "诗情画意",
     "navigationBarTextStyle": "white"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "诗",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/photoshop/photoshop",
+        "text": "美图",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "",
+        "selectedIconPath": ""
+      }
+    ],
+    "color": "#fff",
+    "selectedColor": "#FF00FF",
+    "backgroundColor": "#000"
+  }
 }
