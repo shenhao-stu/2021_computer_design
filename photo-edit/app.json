@@ -9,35 +9,29 @@
     "pages/photoshop/photoshop"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#000",
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "诗情画意",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle":"black"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "诗",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "诗"
       },
       {
         "pagePath": "pages/photoshop/photoshop",
-        "text": "美图",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "美图"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "我的",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "我的"
       }
     ],
     "color": "#fff",
-    "selectedColor": "#FF00FF",
+    "selectedColor": "#FFF",
     "backgroundColor": "#000"
   }
 }

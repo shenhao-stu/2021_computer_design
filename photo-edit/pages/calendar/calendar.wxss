@@ -10,7 +10,7 @@
 /**index.wxss**/
 page {
   height: 100%;
-  background-color: #ffe411;
+  background-color: #11ffeb23;
   color: #fff;
 }
 

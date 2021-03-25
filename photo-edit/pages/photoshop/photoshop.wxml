@@ -7,8 +7,28 @@
     <view class="noImageBox" wx:if="{{imageNotChoosed}}" bindtap='chooseOneImage'><text>点击选择图片</text></view>
     <view class="saveButton" wx:if="{{!imageNotChoosed}}" bindtap='saveImgToPhone'><text class="icon-save"></text></view>
     <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true"></image>
+    <view class="hint-wrapper" wx:if="{{keyWords.length>0}}">
+      <text class="hint">请勾选1至4个关键词</text>
+      <checkbox-group bindchange="checkboxChange">
+        <checkbox wx:for="{{keyWords}}" value="{{item}}">{{item}}</checkbox>
+      </checkbox-group>
+    </view>
   </view>
-   <!-- 裁剪页面 -->
+
+  <!-- 滤镜页面 -->
+  <view class="imageView" wx:if="{{page==='filterPage'}}" style="height:{{imgViewHeight}}px">
+    <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove" bindtouchend="uploadScaleEnd"></image>
+    <scroll-view scroll-x="true" class="filter-previews">
+      <view class="filter-wrapper">
+        <view wx:for="{{filterChinese}}" class="filter-item">
+          <image src="{{'https://gitee.com/shenhao-stu/picgo/raw/master/Other/'+item+'.png'}}"></image>
+          <view bindtap="filterChosen" data-name="{{item}}" data-index="{{index}}">{{item}}</view>
+        </view>
+      </view> 
+    </scroll-view>
+  </view>
+
+  <!-- 裁剪页面 -->
   <view class="imageView" wx:if="{{page==='cropPage'}}" style="height:{{imgViewHeight}}px">
     <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove" bindtouchend="uploadScaleEnd"></image>
     <view wx:if="{{isCroper}}" class="cropper-wraper">
@@ -26,12 +46,15 @@
       </view>
     </view>
   </view>
-  <!-- 添加文字页面 -->
+
+  <!-- 添加诗词文字页面 -->
   <view class="imageView" wx:if="{{page==='textPage'}}" style="height:{{imgViewHeight}}px">
     <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true"></image>
-    <text wx:if="{{allText.isTextActive}}" bindtap="{{allText.isTextActive?'focusInput':null}}" bindtouchstart="{{allText.isTextActive?'textMoveStart':null}}" bindtouchmove="{{allText.isTextActive?'textMove':null}}"class="active-text" style="left:{{allText.textL}}px;top:{{allText.textT}}px;font-size:{{allText.fontSize}}px;color:{{allText.fontColor}};font-style:{{allText.fontStyle}};font-weight:{{allText.fontWeight}}">{{allText.someText}}</text> 
-    <input focus="{{inputFocus}}"confirm-type="done" bindinput="inputText" style="position:absolute;left:-9999px;"></input>
+    <text wx:if="{{allText.isTextActive}}" bindtap="{{allText.isTextActive?'focusInput':null}}" bindtouchstart="{{allText.isTextActive?'textMoveStart':null}}" bindtouchmove="{{allText.isTextActive?'textMove':null}}"class="active-text" style="left:{{allText.textL}}px;top:{{allText.textT}}px;font-size:{{allText.fontSize}}px;color:{{allText.fontColor}};font-style:{{allText.fontStyle}};font-weight:{{allText.fontWeight}}">{{allText.someText}}
+    </text> 
+    <input value="{{poem}}" focus="{{inputFocus}}"confirm-type="done" bindinput="inputText" style="position:absolute;left:9px;border: 3px solid black;"></input>
   </view>
+
   <!-- 涂鸦页面 -->
   <view class="imageView" wx:if="{{page==='doodlePage'}}" style="height:{{imgViewHeight}}px">
      <image src="{{tempImageSrc}}" style="width:{{imgWidth}}px;height:{{imgHeight}}px;top:{{imgTop}}px;left:{{imgLeft}}px" disable-scroll="true"></image> 
@@ -41,15 +64,23 @@
   <!-- 主页面-底部 <image src="../../image/1.svg"></image>-->
   <view class="toolbar-bottom" wx:if="{{page==='mainPage'}}">
     <view bindtap='toCropPage'><text class="icon-cutter"></text><text class="text">裁剪</text></view>
-    <view bindtap='toTextPage'><text class="icon-text"></text><text class="text">添加文字</text></view>
+    <view bindtap='toTextPage'><text class="icon-text"></text><text class="text">添加古诗</text></view>
     <view bindtap='toDoodlePage'><text class="icon-pen"></text><text class="text">涂鸦</text></view>
+    <view bindtap='toFilterPage'><text class="icon-filter"></text><text class="text">滤镜</text></view>
   </view>
+
+  <!-- 滤镜页面底部 -->
+  <view class="toolbar-bottom" wx:if="{{page==='filterPage'}}">
+    <view bindtap='toMainPage'><text class="icon-back"></text><text class="text">主菜单</text></view>
+  </view>
+
   <!-- 裁剪页面-底部 -->
   <view class="toolbar-bottom" wx:if="{{page==='cropPage'}}">
     <view bindtap='toMainPage'><text class="icon-back"></text><text class="text">主菜单</text></view>
     <view bindtap='openCroper'><text class="icon-cutbox"></text><text class="text">裁剪框</text></view>
     <view bindtap='bestShow'><text class="icon-bestshow"></text><text class="text">最佳显示</text></view>
   </view>
+
   <!-- 涂鸦页面-底部 -->
   <view wx:if="{{page==='doodlePage'}}">
     <view wx:if="{{isChooseWidth}}" class="toolbar-top toolbar-width">

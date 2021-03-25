@@ -1,6 +1,6 @@
 /* pages/cangTou/cangTou.wxss */
 .container {
-  background-color: #eee17d;
+  background-color: #51bdfc85;
   color: #000;
 }
 
@@ -39,4 +39,11 @@
 .poem-content:first-letter {
   font-size: 40rpx;
   font-weight: bold;
+}
+
+.poem-button {
+  display: block;
+  margin: 30rpx 10rpx;
+  background-color: green;
+  color: white;
 }

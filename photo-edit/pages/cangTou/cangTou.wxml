@@ -4,12 +4,6 @@
   <h2>藏头诗</h2>
   <view class="page-body">
     <form catchsubmit="formSubmit" catchreset="formReset">
-
-      <view class="page-section page-section-gap">
-        <view class="page-section-title">slider</view>
-        <slider value="50" name="slider" show-value ></slider>
-      </view>
-
       <view class="page-section">
         <view class="page-section-title">您要藏的头</view>
         <view class="weui-cells weui-cells_after-title">
@@ -31,5 +25,7 @@
 <view wx:if="{{poem.length>0}}" class="poem-container">
   <view class="poem-title">藏头诗</view>
   <text wx:for="{{poem}}" class="poem-content">{{item+"。"}}</text>
+  <button class="poem-button" bindtap="anotherPoem">换一首</button>
+  <button class="poem-button" bindtap="savePoem">保存这首诗</button>
 </view>
 

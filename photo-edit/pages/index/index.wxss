@@ -1,8 +1,13 @@
 /**index.wxss**/
+page {
+  height: 100%;
+}
 .page-body-wrapper {
   height: 100%;
   width: 100%;
-  background-color: #000;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 255, 255);
 }
 .logo{
   display: block;

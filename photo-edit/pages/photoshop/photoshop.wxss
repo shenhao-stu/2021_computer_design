@@ -3,11 +3,17 @@
   overflow: hidden;
   height:60rpx;
 }
+.modify-page {
+  height: 100%;
+  width: 100%;
+}
+
 .imageView{
   width:750rpx;
+  height: 100%;
   text-align: center;
   position: relative;
-  background-color: #cc9999;
+  background-color: #eee;
   overflow: hidden;
 }
 .noImageBox{
@@ -15,6 +21,32 @@
   height:100%;
   text-align: center;
   line-height: 1000rpx;
+}
+checkbox-group {
+  position: absolute;
+  width: 100%;
+  bottom: 10rpx;
+  text-align: center;
+}
+.hint-wrapper {
+  display: block;
+  position: fixed;
+  bottom: 160rpx;
+  background-color: rgba(152, 238, 216, 0.7);
+  border-radius: 5rpx;
+  width: 100%;
+  height: 165rpx;
+}
+.hint {
+  display: block;
+  position: absolute;
+  bottom: 120rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 1rpx solid black;
+}
+checkbox {
+  margin-left: 10rpx;
 }
 .saveButton{
   position:absolute;
@@ -161,8 +193,9 @@
   position: fixed;
   bottom: 0;
   height:160rpx;
-  border-top: 1rpx solid #b17a7e;
-  background-color: #cc9999;
+  border-top: 1rpx solid #fff;
+  background-color: #000;
+  color: #fff;
 }
 .toolbar-bottom view{
   display: inline-block;
@@ -264,6 +297,19 @@
 }
 .icon-pen{
   background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E %3Ctitle%3Eedit-pencil%3C/title%3E %3Cpath d='M12.3 3.7l4 4-12.3 12.3h-4v-4l12.3-12.3zM13.7 2.3l2.3-2.3 4 4-2.3 2.3-4-4z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
+  background-size: cover;
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom: 55rpx;
+}
+.icon-filter{
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E %3Ctitle%3Eedit-pencil%3C/title%3E %3Cpath d='M12.3 3.7l4 4-12.3 12.3h-4v-4l12.3-12.3zM13.7 2.3l2.3-2.3 4 4-2.3 2.3-4-4z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E %3Ctitle%3Efont%3C/title%3E %3Cpath d='M24.987 0.506c-2.829 0-4.644-0.506-7.558-0.506-9.415 0-13.806 5.362-13.806 10.809 0 3.209 1.52 4.264 4.518 4.264-0.211-0.464-0.591-0.971-0.591-3.251 0-6.375 2.406-8.233 5.489-8.36 0 0-2.529 24.793-9.868 27.767v0.771h9.894l3.376-16h6.183l1.377-4h-6.716l1.623-7.693c1.858 0.38 3.673 0.76 5.235 0.76 1.942 0 3.715-0.591 4.686-5.066-1.182 0.38-2.449 0.506-3.842 0.506z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
+
   background-size: cover;
   display: inline-block;
   width: 40rpx;
@@ -386,9 +432,9 @@ background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www
 /* 添加文字 */
 .active-text{
   position:absolute;
-  border: 4rpx solid rgba(180,180,180,0.8);
+  border: 4rpx solid rgba(180,180,180,0.9);
   border-radius: 20rpx;
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.8);
 }
 .compete-text{
   border: 4rpx solid transparent;
@@ -443,4 +489,35 @@ background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www
 }
 .confirm-bar2:active .icon-checkmark{
   background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Ctitle%3Echeck%3C/title%3E %3Cpath d='M20.7 5.3c-0.4-0.4-1-0.4-1.4 0l-10.3 10.3-4.3-4.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l5 5c0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l11-11c0.4-0.4 0.4-1 0-1.4z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
+}
+
+.filter-previews {
+  position: fixed;
+  bottom: 80px;
+  height: 130px;
+}
+
+.filter-wrapper {
+  display: flex;
+  width: 800px;
+  height: 130px;
+}
+
+.filter-item {
+  width: 100px;
+  position: relative;
+  height: 130px;
+}
+
+.filter-item image {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.filter-item view {
+  position: absolute;
+  bottom: 3px;
+  text-align: center;
+  width: 100%;
 }

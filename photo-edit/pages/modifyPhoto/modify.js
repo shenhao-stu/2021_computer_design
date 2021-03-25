@@ -108,14 +108,13 @@ Page({
     wx.uploadFile({
       filePath: this.data.tempImageSrc,
       name: 'file',
-      url: 'http://8.129.5.124:5500/filter',
+      url: 'https:ai-poetry:5000/filter',
       formData: {
         opt: opt
       },
       success(res) {
         console.log('滤镜图片获取成功')
         let img64 = JSON.parse(res.data).result
-        console.log(img64)
 
         //声明文件系统
         const fs = wx.getFileSystemManager();
@@ -406,6 +405,17 @@ Page({
   //生成诗歌
   toTextPage(){
     var self = this
+    if (self.data.checkedKeyWords.length > 4) {
+      wx.showToast({
+        title: '至多选择4个',
+        icon: "none",
+        duration: 2000
+      })
+      return
+    } //用户选择超过4个关键字，我们提示不行
+    if (self.data.checkedKeyWords.length === 0) {
+      self.setData({checkedKeyWords: [self.data.keyWords[0]]})
+    } //用户没选择关键字，我们默认选择第一个
     getPoem(self)
     loadImgOnImage(self)
     self.setData({
@@ -610,48 +620,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   checkboxChange(e) {
     const keyWords = this.data.keyWords
     const checkedKeyWords = []
@@ -691,9 +659,11 @@ function chooseImage(self){
 }
 function getPoem(self) {
   console.log(self.data.checkedKeyWords.join(' '))
+  wx.showLoading({
+    title: '努力写诗中',
+  })
   wx.request({
     url: 'https://ai-poetry.top:5000/GenPoem',
-    // url: 'http://8.129.5.124:5000/GenPoem',
     method: 'POST',
     header: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -707,6 +677,7 @@ function getPoem(self) {
       self.setData({
         poem: res.data.result
       })
+      wx.hideLoading()
     },
     fail() {
       console.log('请求古诗失败')
@@ -725,14 +696,11 @@ function getKeyWords(self) {
     success(res) {
       const obj =  JSON.parse(res.data)
       self.setData({keyWords: obj.result.split(' ')})
+      wx.hideLoading()
       console.log(self.data.keyWords)
     },
     fail() {
       console.log('图片实体请求失败')
-      self.setData({isLoadingEntity: false})
-    },
-    complete() {
-      wx.hideLoading()
     }
   })
 }
@@ -761,7 +729,6 @@ function loadImgOnImage(self){
         imgTop: self.startY,
         imgLeft: self.startX
       })
-      wx.hideLoading();
     }
   })
 }
@@ -886,7 +853,6 @@ function saveImgUseTempCanvas(self, delay, fn){
       },
       fail() {
         console.log("canvas转图片失败")
-        wx.hideLoading()
       }
     })
   }, delay)

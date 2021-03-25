@@ -34,7 +34,13 @@ Page({
     isChooseFontPattern: false,
     allText:{},
     // texted:false,
-    inputFocus:false
+    inputFocus:false,
+    keyWords: [],        // 图片识别的关键字
+    checkedKeyWords: [], // 用户勾选的关键字
+    poem: "请输入文字",
+    // 滤镜
+    filterInfo: [],
+    filterChinese: [],
   },
 
   /**
@@ -60,6 +66,98 @@ Page({
     loadImgOnImage(this)
     this.setData({
       page:'mainPage'
+    })
+  },
+  toFilterPage() {
+    var self = this
+    loadImgOnImage(self)
+    self.setData({
+      page: 'filterPage',
+      
+        filterInfo: [
+          'sakura',
+          'ice_lady',
+          'story',
+          'abao',
+          'jiang_nan',
+          'trip',
+          'calm',
+          'cutie',
+        ],
+        filterChinese: [
+          '樱花',
+          '冰美人',
+          '故事',
+          '阿宝色',
+          '江南',
+          '旅程',
+          '平静',
+          '唯美',
+        ]
+    })
+  },
+  filterChosen(ev) {
+    let name = ev.target.dataset.name
+    let index = ev.target.dataset.index
+    console.log(`${name},${index}`)
+
+    let self = this
+    
+    let opt = self.data.filterInfo[index]
+
+    wx.uploadFile({
+      filePath: this.data.tempImageSrc,
+      name: 'file',
+      url: 'https:ai-poetry:5000/filter',
+      formData: {
+        opt: opt
+      },
+      success(res) {
+        console.log('滤镜图片获取成功')
+        let img64 = JSON.parse(res.data).result
+
+        //声明文件系统
+        const fs = wx.getFileSystemManager();
+        //随机定义路径名称
+        var times = new Date().getTime();
+        var imgSrc = wx.env.USER_DATA_PATH + '/' + times + '.png';
+        
+        //将base64图片写入
+        fs.writeFile({
+          filePath: imgSrc,
+          data: img64,
+          encoding: 'base64',
+          success: (res) => {
+            //写入成功了的话，新的图片路径就能用了
+            console.log("滤镜写入成功")
+            self.setData({
+              tempImageSrc: imgSrc
+            })
+            loadImgOnImage(self)
+          }
+        });
+
+        // var initRatio = self.initRatio
+        // var tempCanvasWidth = self.scaleWidth * initRatio
+        // var tempCanvasHeight = self.scaleHeight * initRatio
+
+        // console.log(tempCanvasHeight + "," + tempCanvasWidth)
+
+        // wx.showLoading({
+        //   title: '正在加载滤镜',
+        // })
+        // var ctx = wx.createCanvasContext('tempCanvas')
+        // ctx.drawImage("data:image/png;base64," + img64, 0, 0, tempCanvasWidth, tempCanvasHeight)
+        // ctx.draw()
+
+        // self.setData({
+        //   tempCanvasWidth,
+        //   tempCanvasHeight
+        // })
+        // //保存图片到临时路径
+        // saveImgUseTempCanvas(self, 100, loadImgOnImage)
+      },
+
     })
   },
   toCropPage(){
@@ -304,6 +402,7 @@ Page({
     })
   },
   //添加文字
+  //生成诗歌
   toTextPage(){
     var self = this
     loadImgOnImage(self)
@@ -319,12 +418,12 @@ Page({
   inputText(e){
     var allText = this.data.allText
     allText.someText = e.detail.value
-    if (allText.someText.length == 0) {
-      allText.someText = "点击输入文字"
-      }
-    this.setData({
-      allText: allText
-    })
+    if (allText.someText.length === 0) {
+      allText.someText = this.data.poem
+      this.setData({allText})
+      return this.data.poem
+    }
+    this.setData({allText})
   },
   textMoveStart(e){
     this.textX = e.touches[0].clientX
@@ -360,8 +459,8 @@ Page({
     var allText={}
     allText={
       idx: allText.length - 1,
-      someText: "点击输入文字",
-      fontColor: this.fontColor ? this.fontColor:'rgba(20,20,20,0.8)',
+      someText: this.data.poem, // 指定为诗歌
+      fontColor: this.fontColor ? this.fontColor:'rgba(0,0,0,0.8)',
       fontSize: this.fontSize ? this.fontSize:14,
       fontStyle: 'normal',
       fontWeight: 'normal',
@@ -509,48 +608,21 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  checkboxChange(e) {
+    const keyWords = this.data.keyWords
+    const checkedKeyWords = []
+    const values = e.detail.value
+    this.setData({checkedKeyWords})
+    for (let word of keyWords) {
+      if (values.indexOf(word) !== -1) {
+        checkedKeyWords.push(word)
+      }
+    }
+    this.setData({checkedKeyWords})
+    console.log(this.data.checkedKeyWords)
   }
 })
+
 function chooseImage(self){
   wx.chooseImage({
     count: 1,
@@ -572,12 +644,14 @@ function chooseImage(self){
     }
   })
 }
+
 function loadImgOnImage(self){
   wx.getImageInfo({
     src: self.data.tempImageSrc,
     success: function (res) {
       self.oldScale = 1
       self.initRatio = res.height / self.imgViewHeight  //转换为了px 图片原始大小/显示大小
+      console.log("initRatio已被指定:" + self.initRatio)
       if (self.initRatio < res.width / (750 * self.deviceRatio)) {
         self.initRatio = res.width / (750 * self.deviceRatio)
       }
@@ -595,7 +669,6 @@ function loadImgOnImage(self){
         imgTop: self.startY,
         imgLeft: self.startX
       })
-      wx.hideLoading();
     }
   })
 }
@@ -695,6 +768,7 @@ function drawOnTouchMove(self, e) {
 }
 
 function saveImgUseTempCanvas(self, delay, fn){
+  console.log(self.data.tempCanvasWidth)
   setTimeout(function () {
     wx.canvasToTempFilePath({
       x:0,
@@ -709,12 +783,16 @@ function saveImgUseTempCanvas(self, delay, fn){
       success: function (res) {
         wx.hideLoading();
         console.log(res.tempFilePath)
+        console.log("canvas转图片成功")
         self.setData({
           tempImageSrc: res.tempFilePath
         })
         if(fn){
           fn(self) 
         }
+      },
+      fail() {
+        console.log("canvas转图片失败")
       }
     })
   }, delay)

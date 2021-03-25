@@ -2,7 +2,7 @@
 <view class="wrapper">
   <image class="bg" src="../../image/中国风.jpg"></image>
   <text class="title">我的创作</text>
-  <view wx:for="{{poem}}" bindtap="ontap" data-index="{{index}}">
+  <view wx:for="{{poem}}" bindtap="ontap" class="item" data-index="{{index}}">
     <text>{{item}}</text>
   </view>
 
@@ -21,6 +21,6 @@
     </view>
     <button bindtap="changeContent">修改内容</button>
     <button bindtap="deletePoem">删除本首</button>
-    <button bindtap="closeModify">关闭</button>
+    <button bindtap="closeModify">关闭窗口</button>
   </view>
 </view>

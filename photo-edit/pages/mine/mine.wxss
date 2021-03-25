@@ -30,9 +30,24 @@
   width: 70%;
   top: 15%;
   left: 15%;
-  background-color: pink;
+  background-color: skyblue;
+  box-shadow: skyblue 0 0 5px 5px;
 }
 
 input {
-  background-color:skyblue;
+  background-color:rgb(104, 115, 119);
+}
+
+.item {
+  margin: 20rpx;
+  border: 2px dotted green;
+  border-radius: 10rpx;
+}
+
+button {
+  margin: 30rpx 100rpx;
+  border-radius: 10rpx;
+  padding: 0;
+  font-size: medium;
+  line-height: 1.5;
 }

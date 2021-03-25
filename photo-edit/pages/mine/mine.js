@@ -16,14 +16,12 @@ Page({
    */
   onLoad: function (options) {
     // 以下为测试代码
-    wx.setStorageSync("poem", [
-        "窗前明月光，疑似地上霜，举头望明月，低头思故乡。",
-        "两个黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。"
-      ])
+    // wx.setStorageSync("poem", [
+    //     "窗前明月光，疑似地上霜，举头望明月，低头思故乡。",
+    //     "两个黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。"
+    //   ])
     // 获取本地存储诗词，加载到this.data中
-    const poem = wx.getStorageSync('poem')
-    console.log(poem)
-    this.setData({poem})
+    
   },
 
   /**
@@ -37,7 +35,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const poem = wx.getStorageSync('poem')
+    console.log(poem)
+    this.setData({poem})
   },
 
   /**
