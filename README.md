@@ -18,8 +18,23 @@
     <img alt="HitCount" height="28px" src="http://hits.dwyl.com/shenhao-stu/2021_computer_design.svg" style="max-width:100%;">
   </a>
 </p>
-
 特色：AI自动识别上传的图片并生成诗歌，进行配图 + 全唐诗、全宋词的数据库模糊匹配
+
+#### 使用步骤：
+
+- **扫描二维码图片**
+
+<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210327000009820.png" height=40% width=40% />
+
+<u>由于小程序正在进行审核，可以使用下面第二种方式</u>
+
+- **打开微信开发者工具，导入photo-edit项目**
+
+![Snipaste_2021-03-27_00-05-42](https://gitee.com/shenhao-stu/picgo/raw/master/Other/Snipaste_2021-03-27_00-05-42.png)
+
+---
+
+
 #### MongoDB + Flask实现诗词模糊查询
 
 ##### step 1 : 诗词的爬取
@@ -178,5 +193,5 @@ python3 sample_serve.py
 - msg : success
 - state : success
 - res : 图片Base64编码
-![](./Filter/res_img.jpg)
 
+![image-20210327000838518](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210327000838518.png)

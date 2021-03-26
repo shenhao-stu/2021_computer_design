@@ -40,8 +40,21 @@ input {
 
 .item {
   margin: 20rpx;
-  border: 2px dotted green;
+  border: 2px dotted rgb(89, 125, 201);
   border-radius: 10rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#index {
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: rgb(89, 125, 201);
+  color: white;
+  text-align: center;
 }
 
 button {

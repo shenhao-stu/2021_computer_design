@@ -108,7 +108,7 @@ Page({
     wx.uploadFile({
       filePath: this.data.tempImageSrc,
       name: 'file',
-      url: 'https:ai-poetry:5000/filter',
+      url: 'https://ai-poetry.top:5000/filter',
       formData: {
         opt: opt
       },
@@ -157,7 +157,9 @@ Page({
         // //保存图片到临时路径
         // saveImgUseTempCanvas(self, 100, loadImgOnImage)
       },
-
+      fail() {
+        console.log("滤镜获取失败")
+      }
     })
   },
   toCropPage(){
@@ -695,9 +697,20 @@ function getKeyWords(self) {
     url: 'https://ai-poetry.top:5000/predict',
     success(res) {
       const obj =  JSON.parse(res.data)
-      self.setData({keyWords: obj.result.split(' ')})
-      wx.hideLoading()
-      console.log(self.data.keyWords)
+      if (obj.result === "不合规") {
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '图片不合规',
+              icon: 'none'
+            }, 2000)
+          },
+        })
+      } else {
+        self.setData({keyWords: obj.result.split(' ')})
+        wx.hideLoading()
+        console.log(self.data.keyWords)
+      }
     },
     fail() {
       console.log('图片实体请求失败')

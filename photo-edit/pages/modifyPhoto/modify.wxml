@@ -21,7 +21,7 @@
     <scroll-view scroll-x="true" class="filter-previews">
       <view class="filter-wrapper">
         <view wx:for="{{filterChinese}}" class="filter-item">
-          <image src="{{'https://gitee.com/shenhao-stu/picgo/raw/master/Other/'+item+'.png'}}"></image>
+          <image src="{{'../../image/filters/'+item+'.png'}}"></image>
           <view bindtap="filterChosen" data-name="{{item}}" data-index="{{index}}">{{item}}</view>
         </view>
       </view> 

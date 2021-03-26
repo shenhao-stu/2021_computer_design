@@ -3,7 +3,7 @@
   <image class="bg" src="../../image/中国风.jpg"></image>
   <text class="title">我的创作</text>
   <view wx:for="{{poem}}" bindtap="ontap" class="item" data-index="{{index}}">
-    <text>{{item}}</text>
+    <text id="index">{{index+1}}</text><text> {{item}}</text>
   </view>
 
   <!--诗歌修改页面 -->
