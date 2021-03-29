@@ -1,0 +1,53 @@
+/* pages/mine/mine.wxss */
+.wrapper {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.bg {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.title {
+  margin-top: 30rpx;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 60rpx;
+}
+
+.modify {
+  display: block;
+  position: absolute;
+  width: 70%;
+  top: 15%;
+  left: 15%;
+  background-color: skyblue;
+  box-shadow: skyblue 0 0 5px 5px;
+}
+
+input {
+  background-color:rgb(104, 115, 119);
+}
+
+.item {
+  margin: 20rpx;
+  border: 2px dotted green;
+  border-radius: 10rpx;
+}
+
+button {
+  margin: 30rpx 100rpx;
+  border-radius: 10rpx;
+  padding: 0;
+  font-size: medium;
+  line-height: 1.5;
+}

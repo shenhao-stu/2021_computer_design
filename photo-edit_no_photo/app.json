@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/modifyPhoto/modify",
+    "pages/cangTou/cangTou",
+    "pages/calendar/calendar",
+    "pages/mine/mine",
+    "pages/photoshop/photoshop"
+  ],
+  "window": {
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "诗情画意",
+    "navigationBarTextStyle":"black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "诗"
+      },
+      {
+        "pagePath": "pages/photoshop/photoshop",
+        "text": "美图"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ],
+    "color": "#fff",
+    "selectedColor": "#FFF",
+    "backgroundColor": "#000"
+  }
+}

@@ -1,0 +1,49 @@
+/* pages/cangTou/cangTou.wxss */
+.container {
+  background-color: #51bdfc85;
+  color: #000;
+}
+
+.weui-input {
+  border: 3rpx solid black;
+  margin: 0 50rpx;
+  padding: 20rpx;
+}
+
+.page-section-title, h2 {
+  font-weight: bold;
+  font-size: 40rpx;
+}
+
+.poem-container {
+  margin-top: 70rpx;
+  color: #eeeeee;
+  border-radius: 30rpx;
+  background-color: #404040;
+  box-shadow: 10rpx 10rpx 10rpx 0 #404040;
+  font-family: Georgia,"Nimbus Roman No9 L","Songti SC",STSong,"AR PL New Sung","AR PL SungtiL GB",NSimSun,SimSun,"TW\-Sung","WenQuanYi Bitmap Song","AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE",sans-serif;
+}
+
+.poem-title {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40rpx;
+}
+
+.poem-content {
+  display: block;
+  text-align: center;
+}
+
+.poem-content:first-letter {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.poem-button {
+  display: block;
+  margin: 30rpx 10rpx;
+  background-color: green;
+  color: white;
+}
