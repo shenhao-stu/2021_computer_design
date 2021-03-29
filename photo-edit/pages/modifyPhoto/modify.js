@@ -649,8 +649,48 @@ function chooseImage(self){
         tempImageSrc: tempFilePaths[0],
         originImageSrc: tempFilePaths[0],
       })
-      loadImgOnImage(self)
-      getKeyWords(self)
+
+      wx.showLoading({
+        title: '图片审核中',
+      })
+      wx.uploadFile({
+        filePath: self.data.tempImageSrc,
+        name: 'file',
+        url: 'https://ai-poetry.top:5000/porn',
+        success(res) {
+          wx.hideLoading()
+          console.log(res.data)
+          const isValid = JSON.parse(res.data).result  
+          if (isValid === "合规") {
+            loadImgOnImage(self)
+            getKeyWords(self)
+          } else if (isValid === "不合规") {
+            const fileManager = wx.getFileSystemManager()
+            console.log(self.data.tempImageSrc)
+            fileManager.unlink({
+              filePath: self.data.tempImageSrc,
+              success() {
+                console.log("非法图片已删除")
+              },
+              fail(res) {
+                console.log("非法图片删除失败")
+                console.log(res.errMsg)
+              }
+            })
+            self.setData({
+              imageNotChoosed: true,
+              tempImageSrc: ""
+            })
+            wx.showToast({
+              title: '图片不合规',
+              icon: 'none'
+            }, 1000)
+          }
+        }, 
+        fail() {
+          console.log('PORN识别失败')
+        }
+      })
     },
     fail: function (res) {
       self.setData({
@@ -697,25 +737,19 @@ function getKeyWords(self) {
     url: 'https://ai-poetry.top:5000/predict',
     success(res) {
       const obj =  JSON.parse(res.data)
-      if (obj.result === "不合规") {
-        wx.hideLoading({
-          success: (res) => {
-            wx.showToast({
-              title: '图片不合规',
-              icon: 'none'
-            }, 2000)
-          },
-        })
-      } else {
-        self.setData({keyWords: obj.result.split(' ')})
-        wx.hideLoading()
-        console.log(self.data.keyWords)
-      }
+      console.log(obj)
+      wx.hideLoading()
+      self.setData({keyWords: obj.result.split(' ')})
     },
     fail() {
-      console.log('图片实体请求失败')
+      wx.hideLoading({})
+      wx.showToast({
+        title: '识别失败',
+        icon: 'none'
+      }, 1000)
     }
   })
+  
 }
 
 function loadImgOnImage(self){

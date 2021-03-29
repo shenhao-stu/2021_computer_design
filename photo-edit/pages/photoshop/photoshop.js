@@ -68,6 +68,13 @@ Page({
       page:'mainPage'
     })
   },
+  onShow() {
+    console.log("onshow")
+  },
+  onHide() {
+    console.log("onhide")
+    
+  },
   toFilterPage() {
     var self = this
     loadImgOnImage(self)
@@ -607,6 +614,9 @@ Page({
   onReady: function () {
 
   },
+  onShow() {
+    
+  },
 
   checkboxChange(e) {
     const keyWords = this.data.keyWords
@@ -635,7 +645,47 @@ function chooseImage(self){
         tempImageSrc: tempFilePaths[0],
         originImageSrc: tempFilePaths[0],
       })
-      loadImgOnImage(self)
+
+      wx.showLoading({
+        title: '图片审核中',
+      })
+      wx.uploadFile({
+        filePath: self.data.tempImageSrc,
+        name: 'file',
+        url: 'https://ai-poetry.top:5000/porn',
+        success(res) {
+          wx.hideLoading()
+          console.log(res.data)
+          const isValid = JSON.parse(res.data).result  
+          if (isValid === "合规") {
+            loadImgOnImage(self)
+          } else if (isValid === "不合规") {
+            const fileManager = wx.getFileSystemManager()
+            console.log(self.data.tempImageSrc)
+            fileManager.unlink({
+              filePath: self.data.tempImageSrc,
+              success() {
+                console.log("非法图片已删除")
+              },
+              fail(res) {
+                console.log("非法图片删除失败")
+                console.log(res.errMsg)
+              }
+            })
+            self.setData({
+              imageNotChoosed: true,
+              tempImageSrc: ""
+            })
+            wx.showToast({
+              title: '图片不合规',
+              icon: 'none'
+            }, 1000)
+          }
+        }, 
+        fail() {
+          console.log('PORN识别失败')
+        }
+      })
     },
     fail: function (res) {
       self.setData({
@@ -643,6 +693,25 @@ function chooseImage(self){
       })
     }
   })
+  // wx.chooseImage({
+  //   count: 1,
+  //   // sizeType: ['original '], // 可以指定是原图还是压缩图，默认二者都有
+  //   sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //   success: function (res) {
+  //     var tempFilePaths = res.tempFilePaths
+  //     self.setData({
+  //       imageNotChoosed: false,
+  //       tempImageSrc: tempFilePaths[0],
+  //       originImageSrc: tempFilePaths[0],
+  //     })
+  //     loadImgOnImage(self)
+  //   },
+  //   fail: function (res) {
+  //     self.setData({
+  //       imageNotChoosed: true
+  //     })
+  //   }
+  // })
 }
 
 function loadImgOnImage(self){

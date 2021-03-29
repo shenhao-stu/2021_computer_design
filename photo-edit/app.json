@@ -9,29 +9,32 @@
     "pages/photoshop/photoshop"
   ],
   "window": {
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "诗情画意",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "诗"
+        "iconPath": "image/tabbar-icon/诗字_2.png",
+        "selectedIconPath": "image/tabbar-icon/诗字_1.png"
       },
       {
         "pagePath": "pages/photoshop/photoshop",
-        "text": "美图"
+        "iconPath": "image/tabbar-icon/美图_2.png",
+        "selectedIconPath": "image/tabbar-icon/美图_1.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "我的"
+        "iconPath": "image/tabbar-icon/我_2.png",
+        "selectedIconPath": "image/tabbar-icon/我_1.png"
       }
     ],
-    "color": "#fff",
-    "selectedColor": "#FFF",
-    "backgroundColor": "#000"
+    "color": "#000",
+    "selectedColor": "#333",
+    "backgroundColor": "#fff"
   }
 }
